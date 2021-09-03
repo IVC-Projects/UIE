@@ -294,7 +294,6 @@ class T_CNN(object):
                 raise NotImplementedError("[-] Not supported scaling factor (%d)" % scale_factor)
             return x
 
-    '''2 Branches -- BEST'''
     def model(self):  # best
         with tf.variable_scope("main_branch") as scope3:
             input_raw = tf.concat(axis=3, values=[self.images])
@@ -316,29 +315,23 @@ class T_CNN(object):
             out1 = tf.nn.sigmoid(out_conv10)
 
             #   branch 1
-            # 1. head
+
             head = tfu.conv2d(input_raw, f=64, k=3, name="conv2d-head1")
             head = tfu.conv2d(head, f=64, k=3, s=2, name="conv2d-head2")
             print('head:', head)  # 128x128
 
-            # 2. body
             x = head
-            for i in range(3):  # FINAL：3  消融实验：1,2,4
+            for i in range(3):  
                 x = self.residual_group(x, 64, 3, 16, False, name=str(i))
             body = tfu.conv2d(x, f=64, k=3, name="conv2d-body")
-            print('x_body:', x)
+
             body += head  # tf.math.add(body, head)
-            print('x_body+head:', x)
-            # 3. tail
+
             x = self.up_scaling(x, 64, 2, name='up-scaling')
-            print('x_upscale:', x)
 
-            print('x_tail:', x)
             tail = tfu.conv2d(x, f=3, k=3, name="conv2d-tail")
-            print('tail:', tail)
 
-            # x = self.image_processing(tail, sign=1, name='post-processing')
-            # print('x_final:', x)
+
             x = tf.nn.sigmoid(tail)
             out2 = x
             input_concat = tf.concat(axis=3, values=[out1, out2])  # best
@@ -348,7 +341,7 @@ class T_CNN(object):
             conv4_concat = conv2d(conv3_concat, 16, 6, k_h=3, k_w=3, d_h=1, d_w=1, name="conv_s_concat")
 
             conv_s_concat = tf.nn.sigmoid(conv4_concat)
-            print('conv_s_concat', conv_s_concat)
+
 
             final_out = tf.multiply(0.5, tf.add(tf.multiply(out1, conv_s_concat[:, :, :, 0:3]),
                                                 tf.multiply(out2, conv_s_concat[:, :, :, 3:6])))
