@@ -12,6 +12,6 @@ To test these images, you need to move these output images to an another folder,
 To test images, you need to check the checkpoint_dir in main_test_drcan.py and the filenames and data_dir in main_test_drcan.py. Also, the network is need to be noticed, and check if the network is the same as the network when training the model
 
 #3.
-You can download the model from the link: https://drive.google.com/drive/folders/1r5k5YHVsUNUmX9cbZqCAzclCOLny8bT2?usp=sharing
+You can download the model and vgg-pretrained model from the following link: https://drive.google.com/drive/folders/1r5k5YHVsUNUmX9cbZqCAzclCOLny8bT2?usp=sharing
 
 
