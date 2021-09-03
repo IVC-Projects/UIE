@@ -3,12 +3,12 @@ Underwater Image Enhancement
 
 
 #1. TRAIN:
-XX_main_train_drcan.py
-XX_model_train_drcan.py
+XX_main_train_drcan.py \n
+XX_model_train_drcan.py\n
 
 #2. TEST:
-XX_mian_test_drcan.py
-XX_model_drcan.py
+XX_mian_test_drcan.py\n
+XX_model_drcan.py\n
 
 Test images: test_images_pair_XXXX.
 The output images will be stored in the same folder, and named “xx_out.png”.
