@@ -203,11 +203,7 @@ class T_CNN(object):
             x = head
             for i in range(3):  
                 x = self.residual_group(x, 64, 3, 16, False, name=str(i))
-            #body = tfu.conv2d(x, f=64, k=3, name="conv2d-body")
 
-            #body += head  # tf.math.add(body, head)
-
-            #x = self.up_scaling(x, 64, 2, name='up-scaling')
 
             tail = tfu.conv2d(x, f=3, k=3, name="conv2d-tail")
 
