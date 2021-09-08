@@ -324,7 +324,7 @@ class T_CNN(object):
             for i in range(3):  
                 x = self.residual_group(x, 64, 3, 16, False, name=str(i))
 
-
+            x = self.up_scaling(x, 64, 2, name='up-scaling')
             tail = tfu.conv2d(x, f=3, k=3, name="conv2d-tail")
 
 
